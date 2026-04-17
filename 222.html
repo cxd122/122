@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DP KNB 一键测试</title>
+</head>
+<body>
+    <h2>点击下方按钮唤起大众点评APP并执行测试</h2>
+    <button onclick="openDPApp()">打开点评APP并开始测试</button>
+    <p>如果没有反应，请确保已安装大众点评APP。</p>
+
+    <script>
+        // 跳转到APP内置WebView并加载测试脚本
+        function openDPApp() {
+            // 用大众点评的Schema链接，在APP内打开你的测试页面
+            const targetUrl = encodeURIComponent("https://cxd122.github.io/dp-knb-test/");
+            const schemaUrl = `dianping://webview/open?url=${targetUrl}`;
+            window.location.href = schemaUrl;
+        }
+    </script>
+</body>
+</html>
